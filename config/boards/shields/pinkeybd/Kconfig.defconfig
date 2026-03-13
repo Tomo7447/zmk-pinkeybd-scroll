@@ -14,10 +14,6 @@ if SHIELD_PINKEYBD_RIGHT
         bool
         default y
 
-    config ZMK_BLE
-        bool
-        default y
-
     config ZMK_POINTING
         bool
         default y
@@ -26,7 +22,7 @@ endif
 
 if SHIELD_PINKEYBD_LEFT
     config ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS
-        default y
+        default 1
 endif
 
 if SHIELD_PINKEYBD_LEFT || SHIELD_PINKEYBD_RIGHT
