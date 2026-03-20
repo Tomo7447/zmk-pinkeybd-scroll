@@ -10,6 +10,8 @@
 
 &lt { tapping-term-ms = <140>; };
 
+&mt { flavor = "tap-preferred"; };
+
 &mkp_input_listener { input-processors = <&zip_temp_layer 5 300>; };
 
 &kscan0 {
@@ -37,6 +39,124 @@
 
             display-name = "Layer-Tap";
         };
+
+        minus_single: minus_single {
+            compatible = "zmk,behavior-mod-morph";
+            label = "MINUS_SINGLE";
+            bindings = <&kp MINUS>, <&kp LS(N7)>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT)>;
+        };
+
+        slash_double: slash_double {
+            compatible = "zmk,behavior-mod-morph";
+            label = "SLASH_DOUBLE";
+            bindings = <&kp SLASH>, <&kp AT_SIGN>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT)>;
+        };
+
+        period_exclamation: period_exclamation {
+            compatible = "zmk,behavior-mod-morph";
+            label = "PERIOD_EXCLAMATION";
+            bindings = <&kp PERIOD>, <&kp EXCL>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT)>;
+        };
+
+        comma_question: comma_question {
+            compatible = "zmk,behavior-mod-morph";
+            label = "COMMA_QUESTION";
+            bindings = <&kp COMMA>, <&kp QUESTION>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT)>;
+        };
+    };
+
+    combos {
+        compatible = "zmk,combos";
+
+        left_kakko {
+            bindings = <&kp LS(N8)>;
+            key-positions = <2 3>;
+            layers = <0 1>;
+        };
+
+        right_kakko {
+            bindings = <&kp LS(N9)>;
+            key-positions = <3 4>;
+            layers = <0 1>;
+        };
+
+        left_kagi {
+            bindings = <&kp RIGHT_BRACKET>;
+            key-positions = <13 14>;
+            layers = <0 1>;
+        };
+
+        right_kagi {
+            bindings = <&kp NUHS>;
+            key-positions = <14 15>;
+            layers = <0 1>;
+        };
+
+        syounari {
+            bindings = <&kp LS(COMMA)>;
+            key-positions = <24 25>;
+            layers = <0 1>;
+        };
+
+        dainari {
+            bindings = <&kp LS(PERIOD)>;
+            key-positions = <25 26>;
+            layers = <0 1>;
+        };
+
+        left_boot_reset {
+            bindings = <&bootloader>;
+            key-positions = <0 1 2 3>;
+            layers = <0>;
+        };
+
+        right_boot_reset {
+            bindings = <&bootloader>;
+            key-positions = <7 8 9 10>;
+            layers = <0>;
+        };
+
+        middle_mouse_click {
+            bindings = <&mkp MCLK>;
+            key-positions = <38 40>;
+            layers = <0 1>;
+        };
+
+        Backspace {
+            bindings = <&kp BACKSPACE>;
+            key-positions = <39 18>;
+            layers = <0 1>;
+        };
+
+        Esc {
+            bindings = <&kp ESCAPE>;
+            key-positions = <2 39>;
+            layers = <1 0>;
+        };
+
+        Tab {
+            bindings = <&kp TAB>;
+            key-positions = <4 39>;
+            layers = <0 1>;
+        };
+
+        Alt {
+            bindings = <&kp LEFT_ALT>;
+            key-positions = <11 39>;
+            layers = <0 1>;
+        };
     };
 
     keymap {
@@ -51,13 +171,13 @@
 
         default_layer {
             bindings = <
-&kp Q       &kp W         &kp E                    &kp R      &kp T  &kp ESC         &kp L      &kp R                    &kp D      &kp Y  &kp P
-&kp A       &kp S         &kp D                    &kp F      &kp G  &kp SCROLLLOCK  &kp G      &kp N                    &kp T      &kp S  &kp K
-&kp Z       &kp X         &kp C                    &kp V      &kp B  &kp TAB         &kp J      &kp H                    &kp M      &kp B  &kp Z
-&kp LSHIFT  &kp LEFT_WIN  &my_lt LOWER LANGUAGE_1  &kp SPACE  &kp Q  &kp RSHIFT      &kp ENTER  &my_lt NUM_L LANGUAGE_2  &kp RCTRL
+&kp Q                 &kp W  &kp E      &kp R  &kp T                                &mt LG(LS(S)) LG(PERIOD)  &kp Y      &kp U      &kp I            &kp O                &kp P
+&kp A                 &kp S  &kp D      &kp F  &kp G                                &none                     &kp H      &kp J      &kp K            &kp L                &minus_single
+&mt LEFT_SHIFT LCTRL  &kp X  &kp C      &kp V  &kp B                                &mt F10 F7                &kp N      &kp M      &comma_question  &period_exclamation  &slash_double
+&kp LCTRL             &mo 2  &kp SPACE  &mo 1  &mt INTERNATIONAL_5 INTERNATIONAL_4  &mkp LCLK                 &kp ENTER  &mkp RCLK  &kp DEL
             >;
 
-            sensor-bindings = <&encoder_msc_down_up>;
+            sensor-bindings = <&inc_dec_kp DOWN_ARROW UP_ARROW>;
         };
 
         // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -67,13 +187,15 @@
         // |    L_SHIFT     |               |               |       LALT    |       none    |    SPACE      |                  |   RSHIFT   |   ENTER       |    LOWER2    |               |               |    RCTRL    |
         // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        Lower_layer {
+        symbol_and_number {
             bindings = <
-&kp LS(FSLH)  &kp LS(COMMA)  &kp LS(DOT)  &kp LS(MINUS)  &kp DOUBLE_QUOTES  &kp PAUSE_BREAK  &kp LPAR   &kp RPAR    &kp UP     &kp LBKT   &kp RBKT
-&kp LC(A)     &kp LC(S)      &kp END      &kp LC(F)      &none              &kp SCROLLLOCK   &kp BSPC   &kp LEFT    &kp DOWN   &kp RIGHT  &kp DEL
-&kp LC(Z)     &kp LC(X)      &kp LC(C)    &kp LC(V)      &kp LALT           &kp TAB          &kp APOS   &kp EQUAL   &kp BSLH   &kp GRAVE  &kp PIPE
-&kp LSHIFT    &kp LALT       &none        &kp SPACE      &kp PSCRN          &kp RSHIFT       &kp ENTER  &mo LOWER2  &kp RCTRL
+&none  &kp LEFT_BRACKET         &kp HASH     &kp SINGLE_QUOTE  &none   &none      &kp N7        &kp N8        &kp N9             &kp LS(MINUS)            &kp LS(SEMI)
+&none  &kp LS(INTERNATIONAL_6)  &kp PERCENT  &kp SEMI          &none   &none      &kp NUMBER_4  &kp N5        &kp NUMBER_6       &kp LS(INTERNATIONAL_1)  &kp MINUS
+&none  &none                    &none        &none             &none   &none      &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3       &kp PERIOD               &kp SLASH
+&none  &none                    &kp SPACE    &none             &kp N0  &mkp LCLK  &kp ENTER     &mkp RCLK     &kp DOUBLE_QUOTES
             >;
+
+            sensor-bindings = <&encoder_msc_down_up>;
         };
 
         // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -83,13 +205,15 @@
         // |    L_SHIFT     |                |               |      LCTRL       |       none   |    SPACE      |                  |   ENTER    |    none     |   R_SHIFT      |               |             |   RCTRL   |
         // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        Lower2_layer {
+        arrow {
             bindings = <
-&none       &kp COMMA  &kp END    &kp C_VOL_UP  &kp SINGLE_QUOTE  &kp ESC         &kp LEFT_BRACE  &kp RIGHT_BRACE  &kp PG_UP  &kp LBRC   &kp RBRC
-&kp LC(A)   &kp LC(S)  &kp END    &kp C_VOL_DN  &kp C_MUTE        &kp SCROLLLOCK  &kp BSPC        &kp HOME         &kp PG_DN  &kp END    &kp DEL
-&kp LC(Z)   &kp LC(X)  &kp LC(C)  &kp LG(V)     &kp LALT          &kp TAB         &kp APOS        &kp EQUAL        &kp BSLH   &kp GRAVE  &kp INS
-&kp LSHIFT  &kp LCTRL  &none      &kp SPACE     &kp PSCRN         &kp RSHIFT      &kp ENTER       &none            &kp RCTRL
+&kp C_MUTE         &none  &none  &none  &none  &none          &kp HOME  &none           &kp UP_ARROW    &none            &none
+&kp C_VOLUME_DOWN  &none  &none  &none  &none  &none          &kp END   &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &none
+&kp C_VOLUME_UP    &none  &none  &none  &mo 6  &none          &none     &none           &none           &none            &none
+&kp LG(H)          &none  &none  &none  &none  &kp PAGE_DOWN  &none     &kp PAGE_UP     &none
             >;
+
+            sensor-bindings = <&encoder_msc_down_up>;
         };
 
         // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -99,7 +223,7 @@
         // |    L_SHIFT     |               |               |    LALT       |   Func_layer  |    SPACE      |               |   R_SHIFT  |      ENTER   |     none      |               |               |       RCTRL   |
         // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        Num_layer {
+        no {
             bindings = <
 &kp N1      &kp N2      &kp N3      &kp N4      &kp N5      &kp ESC     &kp N6      &kp N7      &kp N8      &kp N9      &kp N0
 &kp LS(N1)  &kp LS(N2)  &kp LS(N3)  &kp LS(N4)  &kp LS(N5)  &none       &kp RS(N6)  &kp RS(N7)  &kp RS(N8)  &kp RS(N9)  &kp RS(N0)
@@ -115,7 +239,7 @@
         // |     L_SHIFT |            |            |    LALT    |   none     |    none      |                |   RCTRL    |    none    |    none    |            |             |  Bt_layer    |
         // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        Func_layer {
+        not {
             bindings = <
 &kp F1      &kp F2    &kp F3   &kp F4   &kp F5         &kp C_VOL_UP  &kp F6   &kp F7   &kp F8    &kp F9   &kp F10
 &kp F11     &kp F12   &kp F13  &kp F14  &kp F15        &none         &kp F16  &kp F17  &kp F18   &kp F19  &kp F20
@@ -151,10 +275,10 @@
 
         Bt_layer {
             bindings = <
-&bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &bt BT_SEL 5  &none  &none       &none  &bt BT_CLR  &bt BT_CLR_ALL
-&none         &none         &none         &none         &none         &none         &none  &bt BT_PRV  &none  &bt BT_NXT  &none
-&none         &none         &none         &none         &none         &none         &none  &none       &none  &none       &none
-&none         &none         &none         &none         &none         &none         &none  &none       &none
+&none  &none  &none  &none  &none         &none  &none         &none         &none  &none  &none
+&none  &none  &none  &none  &none         &none  &none         &none         &none  &none  &none
+&none  &none  &none  &none  &none         &none  &bt BT_SEL 1  &bt BT_SEL 2  &none  &none  &none
+&none  &none  &none  &none  &bt BT_SEL 0  &none  &none         &none         &none
             >;
         };
     };
