@@ -10,7 +10,7 @@
 
 &lt { tapping-term-ms = <140>; };
 
-&mt { flavor = "tap-preferred"; };
+&mt { flavor = "balanced"; };
 
 &mkp_input_listener { input-processors = <&zip_temp_layer 5 300>; };
 
@@ -27,7 +27,7 @@
             #sensor-binding-cells = <0>;
             bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
 
-            tap-ms = <20>;
+            tap-ms = <40>;
         };
 
         my_lt: layer_tap {
@@ -140,21 +140,9 @@
             layers = <0 1>;
         };
 
-        Esc {
-            bindings = <&kp ESCAPE>;
-            key-positions = <2 39>;
-            layers = <1 0>;
-        };
-
-        Tab {
-            bindings = <&kp TAB>;
-            key-positions = <4 39>;
-            layers = <0 1>;
-        };
-
-        Alt {
-            bindings = <&kp LEFT_ALT>;
-            key-positions = <11 39>;
+        Shift {
+            bindings = <&kp LEFT_SHIFT>;
+            key-positions = <39 35>;
             layers = <0 1>;
         };
     };
@@ -171,10 +159,10 @@
 
         default_layer {
             bindings = <
-&kp Q                 &kp W  &kp E      &kp R  &kp T                                &mt LG(LS(S)) LG(PERIOD)  &kp Y      &kp U      &kp I            &kp O                &kp P
-&kp A                 &kp S  &kp D      &kp F  &kp G                                &none                     &kp H      &kp J      &kp K            &kp L                &minus_single
-&mt LEFT_SHIFT LCTRL  &kp X  &kp C      &kp V  &kp B                                &mt F10 F7                &kp N      &kp M      &comma_question  &period_exclamation  &slash_double
-&kp LCTRL             &mo 2  &kp SPACE  &mo 1  &mt INTERNATIONAL_5 INTERNATIONAL_4  &mkp LCLK                 &kp ENTER  &mkp RCLK  &kp DEL
+&kp Q             &kp W  &kp E      &kp R  &kp T                                &mt LG(LS(S)) LG(PERIOD)  &kp Y      &kp U      &kp I             &kp O                &kp P
+&kp A             &kp S  &kp D      &kp F  &kp G                                &none                     &kp H      &kp J      &kp K             &kp L                &minus_single
+&mt LEFT_SHIFT Z  &kp X  &kp C      &kp V  &kp B                                &mt F10 F7                &kp N      &kp M      &comma_question   &period_exclamation  &slash_double
+&mt LCTRL TAB     &mo 2  &kp SPACE  &mo 1  &mt INTERNATIONAL_5 INTERNATIONAL_4  &mkp LCLK                 &kp ENTER  &mkp RCLK  &mt LEFT_ALT DEL
             >;
 
             sensor-bindings = <&inc_dec_kp DOWN_ARROW UP_ARROW>;
@@ -189,10 +177,10 @@
 
         symbol_and_number {
             bindings = <
-&none  &kp LEFT_BRACKET         &kp HASH     &kp SINGLE_QUOTE  &none   &none      &kp N7        &kp N8        &kp N9             &kp LS(MINUS)            &kp LS(SEMI)
-&none  &kp LS(INTERNATIONAL_6)  &kp PERCENT  &kp SEMI          &none   &none      &kp NUMBER_4  &kp N5        &kp NUMBER_6       &kp LS(INTERNATIONAL_1)  &kp MINUS
-&none  &none                    &none        &none             &none   &none      &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3       &kp PERIOD               &kp SLASH
-&none  &none                    &kp SPACE    &none             &kp N0  &mkp LCLK  &kp ENTER     &mkp RCLK     &kp DOUBLE_QUOTES
+&none  &kp LEFT_BRACKET  &kp HASH     &kp SINGLE_QUOTE  &none   &none      &kp N7        &kp N8        &kp N9             &kp LS(MINUS)            &kp LS(SEMI)
+&none  &kp LS(NUMBER_6)  &kp PERCENT  &kp SEMI          &none   &none      &kp NUMBER_4  &kp N5        &kp NUMBER_6       &kp LS(INTERNATIONAL_1)  &kp MINUS
+&none  &none             &none        &none             &none   &none      &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3       &kp PERIOD               &kp SLASH
+&none  &none             &kp SPACE    &none             &kp N0  &mkp LCLK  &kp ENTER     &mkp RCLK     &kp DOUBLE_QUOTES
             >;
 
             sensor-bindings = <&encoder_msc_down_up>;
@@ -207,10 +195,10 @@
 
         arrow {
             bindings = <
-&kp C_MUTE         &none  &none  &none  &none  &none          &kp HOME  &none           &kp UP_ARROW    &none            &none
-&kp C_VOLUME_DOWN  &none  &none  &none  &none  &none          &kp END   &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &none
-&kp C_VOLUME_UP    &none  &none  &none  &mo 6  &none          &none     &none           &none           &none            &none
-&kp LG(H)          &none  &none  &none  &none  &kp PAGE_DOWN  &none     &kp PAGE_UP     &none
+&kp C_MUTE         &none  &kp ESCAPE  &none  &none  &none          &kp HOME  &none           &kp UP_ARROW    &none            &none
+&kp C_VOLUME_DOWN  &none  &none       &none  &none  &none          &kp END   &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &none
+&kp C_VOLUME_UP    &none  &none       &none  &mo 6  &none          &none     &none           &none           &none            &none
+&kp LG(H)          &none  &none       &none  &none  &kp PAGE_DOWN  &none     &kp PAGE_UP     &none
             >;
 
             sensor-bindings = <&encoder_msc_down_up>;
